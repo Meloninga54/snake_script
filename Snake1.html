@@ -1,0 +1,352 @@
+<html>
+<head>
+<title> not many </title>
+</head>
+<body>
+<script language=javascript>
+
+
+
+var i;
+var j;
+var dir="u";
+var len;
+var score=0;
+var t;
+
+var s=new Array(3);
+for(i=0;i<s.length;i+=1)
+{
+s[i]=new Array(2);
+}
+
+
+var a=new Array(22);
+for(i=0;i<a.length;i+=1)
+{
+a[i]=new Array(22);
+for(j=0;j<a.length;j+=1)
+{
+a[i][j]="N";
+}
+}
+for(i=0;i<a[0].length;i+=1)
+{
+a[0][i]=0;
+a[i][0]=0;
+a[21][i]=0;
+a[i][21]=0;
+}
+
+function gri(min,max) 
+{
+min = Math.ceil(min);
+max = Math.floor(max);
+return (Math.floor(Math.random()*(max - min))+min); 
+//The maximum is exclusive and the minimum is inclusive
+}
+
+function createFruit()
+{
+var x1;
+var x2;
+var b=0;
+while(b==0)
+{
+var x1=gri(1,22);
+var x2=gri(1,22);
+if(a[x1][x2]!="S")
+{
+a[x1][x2]="4";
+b=1;
+}
+}
+}
+
+function GameOver()
+{
+clearInterval(t);
+alert("Game Over!!!");
+var s2="";
+s2=s2+"Your score="+score+"\nPlay Again...";
+alert(s2);
+f1.box.value=s2;
+}
+
+function moveSnakeu()
+{
+
+if((a[s[0][0]-1][s[0][1]]==0)||(a[s[0][0]-1][s[0][1]]=="S"))
+{
+GameOver();
+}
+
+else if(a[s[0][0]-1][s[0][1]]=="4")
+{
+s[len]=new Array(2);
+var ct;
+score+=1;
+for(ct=len; ct>0;ct-=1)
+{
+s[ct][0]=s[ct-1][0];
+s[ct][1]=s[ct-1][1];
+}
+s[0][0]-=1;
+a[s[0][0]][s[0][1]]="S";
+createFruit();
+}
+
+else
+{
+var ct;
+a[s[len-1][0]][s[len-1][1]]="N";
+for(ct=len-1; ct>0;ct-=1)
+{
+s[ct][0]=s[ct-1][0];
+s
+[ct][1]=s[ct-1][1];
+}
+s[0][0]-=1;
+a[s[0][0]][s[0][1]]="S";
+}
+
+}
+
+function moveSnaked()
+{
+
+if((a[s[0][0]+1][s[0][1]]==0)||(a[s[0][0]+1][s[0][1]]=="S"))
+{
+GameOver();
+}
+
+else if(a[s[0][0]+1][s[0][1]]=="4")
+{
+s[len]=new Array(2);
+var ct;
+score+=1;
+for(ct=len; ct>0;ct-=1)
+{
+s[ct][0]=s[ct-1][0];
+s[ct][1]=s[ct-1][1];
+}
+s[0][0]+=1;
+a[s[0][0]][s[0][1]]="S";
+createFruit();
+}
+
+else
+{
+var ct;
+a[s[len-1][0]][s[len-1][1]]="N";
+for(ct=len-1; ct>0;ct-=1)
+{
+s[ct][0]=s[ct-1][0];
+s[ct][1]=s[ct-1][1];
+}
+s[0][0]+=1;
+a[s[0][0]][s[0][1]]="S";
+}
+
+}
+
+function moveSnakel()
+{
+
+if((a[s[0][0]][s[0][1]-1]==0)||(a[s[0][0]][s[0][1]-1]=="S"))
+{
+GameOver();
+}
+
+else if(a[s[0][0]][s[0][1]-1]=="4")
+{
+s[len]=new Array(2);
+var ct;
+score+=1;
+for(ct=len; ct>0;ct-=1)
+{
+s[ct][0]=s[ct-1][0];
+s[ct][1]=s[ct-1][1];
+}
+s[0][1]-=1;
+a[s[0][0]][s[0][1]]="S";
+createFruit();
+}
+
+else
+{
+var ct;
+a[s[len-1][0]][s[len-1][1]]="N";
+for(ct=len-1; ct>0;ct-=1)
+{
+s[ct][0]=s[ct-1][0];
+s[ct][1]=s[ct-1][1];
+}
+s[0][1]-=1;
+a[s[0][0]][s[0][1]]="S";
+}
+
+}
+
+function moveSnaker()
+{
+
+if((a[s[0][0]][s[0][1]+1]==0)||(a[s[0][0]][s[0][1]+1]=="S"))
+{
+GameOver();
+}
+
+else if(a[s[0][0]][s[0][1]+1]=="4")
+{
+s[len]=new Array(2);
+var ct;
+score+=1;
+for(ct=len; ct>0;ct-=1)
+{
+s[ct][0]=s[ct-1][0];
+s[ct][1]=s[ct-1][1];
+}
+s[0][1]+=1;
+a[s[0][0]][s[0][1]]="S";
+createFruit();
+}
+
+else
+{
+var ct;
+a[s[len-1][0]][s[len-1][1]]="N";
+for(ct=len-1; ct>0;ct-=1)
+{
+s[ct][0]=s[ct-1][0];
+s[ct][1]=s[ct-1][1];
+}
+s[0][1]+=1;
+a[s[0][0]][s[0][1]]="S";
+}
+
+}
+
+function work()
+{
+if(dir=="u")
+{
+moveSnakeu();
+}
+else if (dir=="d")
+{
+moveSnaked();
+}
+else if (dir=="l")
+{
+moveSnakel();
+}
+else if (dir=="r")
+{
+moveSnaker();
+}
+print();
+}
+
+function createSnake()
+{
+var x1=gri(3,19);
+var x2=gri(3,19);
+a[x1][x2]="S";
+a[x1+1][x2]="S";
+a[x1+2][x2]="S";
+s[0][0]=x1;
+s[0][1]=x2;
+s[1][0]=x1+1;
+s[1][1]=x2;
+s[2][0]=x1+2;
+s[2][1]=x2;
+len=3;
+}
+
+function newGame()
+{
+print();
+createSnake();
+createFruit();
+print();
+t=setInterval(work,1000);
+}
+/*
+function cdir(tom)
+{
+if((dir=="u"&&tom=="d")||(dir=="d"&&tom=="u")||(dir=="l"&&tom=="r")||(dir=="r"&&tom=="l"));
+else
+{
+dir=tom;
+}
+}
+*/
+
+function cdirl()
+{
+if(dir!="r")
+{
+dir="l";
+}
+}
+function cdirr()
+{
+if(dir!="l")
+{
+dir="r";
+}
+}
+function cdiru()
+{
+if(dir!="d")
+{
+dir="u";
+}
+}
+function cdird()
+{
+if(dir!="u")
+{
+dir="d";
+}
+}
+
+function print()
+{
+var s1="";
+var i, j;
+for(j=0;j<a.length;j+=1)
+{
+for (i=0;i<a.length;i+=1) 
+{
+      s1=s1+" " + a[j][i];
+}
+      s1=s1+"\n";
+}
+f1.box.value=s1;
+}
+
+
+
+
+</script>
+<br>
+<br>
+
+<form name=f1>
+<textarea rows=20 cols=20 name="box">
+Click to start...
+</textarea>
+<br>
+<input type=button value="New Game" onclick="newGame()">
+<br>
+<input type=button value="Left" onclick="cdirl()">
+<br>
+<input type=button value="Right" onclick="cdirr()">
+<br>
+<input type=button value="Up" onclick="cdiru()">
+<br>
+<input type=button value="Down" onclick="cdird()">
+</form>
+</body>
+</html>

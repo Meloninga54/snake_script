@@ -1,0 +1,88 @@
+<html>
+<head>
+<title> not many </title>
+</head>
+<body>
+<script language=javascript>
+var i,j;
+var dir='u';
+var s=new array(3);
+for(i=0;i<s.length;i++)
+{
+s[i]=new array(2);
+for(int j=0;j<a.length;j++)
+{
+a[i][j]='N';
+}
+}
+
+var a=new array(21);
+for(i=0;i<a.length;i++)
+{
+a[i]=new array(21);
+for(int j=0;j<a.length;j++)
+{
+a[i][j]='N';
+}
+}
+
+function gri(min, max) 
+{
+min = Math.ceil(min);
+max = Math.floor(max);
+return (Math.floor(Math.random() * (max - min)) + min); 
+<comments>The maximum is exclusive and the minimum is inclusive</comments>
+}
+
+function createFruit();
+{
+var x1=gri(0,21);
+var x2=gri(0,21);
+if(a[x1][x2]!='S')
+{
+a[x1][x2]='4';
+}
+}
+
+function createSnake()
+{
+var x1=gri(0,21);
+var x2=gri(0,21);
+a[x1][x2]='S';
+s[0][0]=x1;
+s[0][1]=x2;
+}
+
+function newGame()
+{
+createSnake();
+createFruit();
+setInterval(print(),500);
+}
+
+function cdir(tom)
+{
+dir=tom;
+}
+
+</script>
+<br>
+<br>
+
+<form name=f1>
+<textarea rows=20 cols=20 name="box">
+Click to start...
+</textarea>
+<br>
+<input type=button value="New Game" onclick="newGame()">
+<br>
+<input type=button value="Left" onclick="cdir(l)">
+<br>
+<input type=button value="Right" onclick="cdir(r)">
+<br>
+<input type=button value="Up" onclick="cdir(u)">
+<br>
+<input type=button value="Down" onclick="cdir(d)">
+</form>
+</body>
+</html>

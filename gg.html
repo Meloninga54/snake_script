@@ -1,0 +1,30 @@
+<html>
+<head>
+<title> not many </title>
+</head>
+<body>
+<script language=javascript>
+var a = new Array((new Array(1,2,3,4,5)),new Array(6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1));
+function print()
+{
+var s1="";
+var i, j;
+for(j=0;j<a.length;j++)
+{
+for (i=0;i<a.length;i++) 
+{
+      s1=s1+" " + a[j][i];
+}
+      s1=s1+"\n";
+}
+f1.box.value=s1;
+}
+
+</script>
+<form name=f1>
+<textarea rows=20 cols=20 name="box">
+Click to start...
+</textarea>
+<input type=button value="Right" onclick="print()">
+</body>
+</html>
